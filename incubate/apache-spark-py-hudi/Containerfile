@@ -1,0 +1,13 @@
+FROM apache/spark-py:v3.4.0 AS base
+
+LABEL author = "Zaheer Abzal"
+
+COPY conf /opt/spark/conf
+COPY versioned/jars /opt/spark-extra/jars
+
+# Spark Connect Pyspark (Client) Dependencies
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
+
+    
+

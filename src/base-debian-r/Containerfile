@@ -1,0 +1,6 @@
+FROM debian:bullseye AS base
+
+LABEL author = "Zaheer Abzal"
+
+RUN apt update && apt install -y --no-install-recommends \
+    r-base=4.0.4-1

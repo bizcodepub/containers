@@ -1,0 +1,15 @@
+FROM docker.io/library/eclipse-temurin:8-jdk AS base
+
+LABEL author = "Zaheer Abzal"
+
+ENV PATH = $PATH:/opt/maven/bin
+
+RUN set -ex; \
+    cd /tmp ; \
+    wget -v "https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz"; \
+    tar -xzvf apache-maven-3.9.2-bin.tar.gz; \
+    mv apache-maven-3.9.2 maven; \
+    mv maven /opt/maven; 
+    
+
+

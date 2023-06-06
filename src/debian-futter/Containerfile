@@ -1,0 +1,31 @@
+FROM debian:bullseye AS base
+
+RUN apt update && apt install -y --no-install-recommends \
+                    curl \
+                    git \
+                    unzip \
+                    file \
+                    xz-utils \ 
+                    zip \
+                    libglu1-mesa
+
+
+FROM base AS build
+
+RUN apt update && apt install -y --no-install-recommends \
+                  tar \
+                && apt reinstall -y ca-certificates \
+                && update-ca-certificates
+
+WORKDIR /tmp
+
+RUN curl https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.7.11-stable.tar.xz --output flutter_linux_3.7.11-stable.tar.xz
+
+RUN tar xf flutter_linux_3.7.11-stable.tar.xz
+
+RUN rm flutter_linux_3.7.11-stable.tar.xz
+
+
+FROM base AS final 
+
+COPY --from=build /tmp/flutter /flutter

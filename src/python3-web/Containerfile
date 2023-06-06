@@ -1,0 +1,8 @@
+FROM z2a/base-debian-python3 AS base
+
+LABEL author = "Zaheer Abzal"
+
+COPY requirements.txt /tmp
+
+RUN pip install -r /tmp/requirements.txt
+
