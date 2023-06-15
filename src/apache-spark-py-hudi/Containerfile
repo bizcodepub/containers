@@ -12,7 +12,8 @@ RUN apt-get update -y; \
 RUN mkdir -p /opt/spark-extra/jars; \
     cd /tmp; \
     wget -v https://repo1.maven.org/maven2/org/apache/hudi/hudi-spark3.3-bundle_2.12/0.13.1/hudi-spark3.3-bundle_2.12-0.13.1.jar; \
-    mv hudi-spark3.3-bundle_2.12-0.13.1.jar /opt/spark-extra/jars/hudi-spark3.3-bundle_2.12-0.13.1.jar;
+    #mv hudi-spark3.3-bundle_2.12-0.13.1.jar /opt/spark-extra/jars/hudi-spark3.3-bundle_2.12-0.13.1.jar;
+    mv hudi-spark3.3-bundle_2.12-0.13.1.jar /opt/spark/jars/hudi-spark3.3-bundle_2.12-0.13.1.jar;
 
     
 USER 185
