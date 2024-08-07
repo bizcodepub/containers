@@ -1,4 +1,4 @@
-FROM z2a/base-debian-python3 AS base
+FROM ghcr.io/bizcodepub/base-debian-python3:0.1.0 AS base
 
 LABEL author = "Zaheer Abzal"
 
