@@ -1,8 +1,9 @@
-FROM ghcr.io/bizcodepub/base-debian-python3:0.1.0 AS base
+FROM ghcr.io/bizcodepub/base-debian-python3:0.2.0 AS base
 
 LABEL author = "Zaheer Abzal"
 
 COPY requirements.txt /tmp
 
-RUN pip install -r /tmp/requirements.txt
+# --break-system-packages flag allows packages to be installed globally without a Python virtual environment
+RUN pip install -r /tmp/requirements.txt --break-system-packages
 
