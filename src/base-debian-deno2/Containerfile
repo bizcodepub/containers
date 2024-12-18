@@ -1,0 +1,17 @@
+FROM debian:bookworm AS base
+
+LABEL author = "Zaheer Abzal"
+
+WORKDIR /tmp
+
+ENV PATH=$PATH:/root/.deno/bin
+
+RUN apt update && apt install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+    unzip
+
+RUN curl -fsSL https://deno.land/install.sh | sh
+
+
+RUN apt remove -y curl ca-certificates unzip
