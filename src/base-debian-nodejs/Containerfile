@@ -1,0 +1,19 @@
+FROM debian:bookworm AS base
+
+LABEL author = "Zaheer Abzal"
+LABEL version = "0.1.0"
+
+WORKDIR /tmp
+
+RUN apt update && apt install -y --no-install-recommends \
+    curl \
+    xz-utils
+
+RUN curl -v --output node-v22.6.0-linux-x64.tar.xz https://nodejs.org/dist/v22.6.0/node-v22.6.0-linux-x64.tar.xz
+ && tar -xJvf node-v22.6.0-linux-x64.tar.xz
+ && mv node-v22.6.0-linux-x64 /usr/local/lib/nodejs/node-v22.6.0
+
+
+
+
+
