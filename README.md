@@ -1,8 +1,8 @@
-# dev-containers
+# Bizcodepub Containers
 
 ## Overview
 
-This repository contains a collection of container build contexts for various development and data science environments. Each subdirectory in `src/` or `incubate/` provides a `Containerfile` (or `Dockerfile`) and optional configuration files for building custom container images.
+This repository contains a collection of container build contexts for various development environments. Each subdirectory in `src/` or `incubate/` provides a `Containerfile` (or `Dockerfile`) and optional configuration files for building custom container images.
 
 ## Structure
 
