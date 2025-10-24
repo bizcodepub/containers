@@ -1,0 +1,55 @@
+FROM debian:bullseye AS base
+
+LABEL author="Zaheer Abzal"
+LABEL version="3.35.7"
+
+RUN apt update && apt install -y --no-install-recommends \
+                    curl \
+                    git \
+                    unzip \
+                    file \
+                    xz-utils \ 
+                    zip \
+                    libglu1-mesa \
+                    ca-certificates \
+                && rm -rf /var/lib/apt/lists/*
+
+
+FROM base AS build
+
+RUN apt update && apt install -y --no-install-recommends \
+                  tar \
+                && apt reinstall -y ca-certificates \
+                && update-ca-certificates \
+                && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp
+
+RUN curl https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.35.7-stable.tar.xz --output flutter_linux_3.35.7-stable.tar.xz
+
+RUN tar xf flutter_linux_3.35.7-stable.tar.xz
+
+RUN rm flutter_linux_3.35.7-stable.tar.xz
+
+
+FROM base AS final 
+
+COPY --from=build /tmp/flutter /flutter
+
+# Create a non-root user
+RUN useradd -m -s /bin/bash flutter
+
+# Fix ownership and permissions
+RUN chown -R flutter:flutter /flutter \
+    && chmod -R 755 /flutter
+
+# Add Flutter to PATH
+ENV PATH="/flutter/bin:${PATH}"
+
+# Switch to non-root user
+USER flutter
+
+# Set up git safe directory and configure flutter
+RUN git config --global --add safe.directory /flutter \
+    && flutter --disable-analytics \
+    && flutter precache --no-android --no-ios
